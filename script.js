@@ -12,13 +12,12 @@ const themeMap = {
 };
 
 const bgm = document.getElementById('bgm');
+bgm.volume = 0.7; 
 const audioToggleBtn = document.getElementById('audio-toggle');
 const trackInfoDiv = document.getElementById('track-info');
-let audioOn = true; // Müzik artık default olarak Açık başlar
-let suppressAudioStateEvents = false; // sekme değişince şarkı otomatik değişir, bu "kullanıcı durdurdu" sayılmasın
+let audioOn = true; 
+let suppressAudioStateEvents = false; 
 
-// Simgeyi HER ZAMAN sesin gerçek durumuna göre güncelle (autoplay engeli gibi
-// durumlarda simge ile gerçek çalma durumu birbirinden kopmasın diye)
 bgm.addEventListener('play', () => {
   if (suppressAudioStateEvents) return;
   audioOn = true;
@@ -42,8 +41,6 @@ function applyTheme(id) {
   }
 
   if (bgm.getAttribute('data-current') !== theme.track) {
-    // Şarkı değişimi sırasında tarayıcının tetiklediği pause/play olaylarını
-    // "kullanıcı sesi kapattı/açtı" olarak yorumlama
     suppressAudioStateEvents = true;
     bgm.setAttribute('data-current', theme.track);
     bgm.src = theme.track;
@@ -61,7 +58,6 @@ function applyTheme(id) {
   }
 }
 
-// Tarayıcı kuralları gereği autoplay engellenirse diye sayfaya bir kerelik dinleyici eklenir
 document.body.addEventListener('click', () => {
   if (audioOn && bgm.paused) {
      bgm.play().catch(() => {});
@@ -69,8 +65,6 @@ document.body.addEventListener('click', () => {
 }, {once: true});
 
 function toggleAudio() {
-  // Gerçek durumu (bgm.paused) baz alarak aç/kapat; audioOn ve ikon
-  // yukarıdaki play/pause dinleyicileri tarafından otomatik güncellenir
   if (bgm.paused) {
     bgm.play().catch(() => {});
   } else {
@@ -79,7 +73,7 @@ function toggleAudio() {
 }
 
 // --- IGOR İNTERAKTİF SOHBET SİSTEMİ (görsel tabanlı) ---
-let hasLeftMainScreen = false; // Ana ekrandan en az bir kez ayrıldık mı? (welcome / welcome back ayrımı için)
+let hasLeftMainScreen = false; 
 
 function showChoices() {
   playSelectSound();
@@ -90,12 +84,10 @@ function showChoices() {
 }
 
 function selectChoice(choice, event) {
-  event.stopPropagation(); // Seçime tıklanıldığında alttaki görselin tekrar tıklanmasını engeller
+  event.stopPropagation(); 
   playSelectSound();
 
-  // Seçenekleri gizle
   document.getElementById('p5-choices').style.display = 'none';
-
   const scene = document.getElementById('igor-scene');
 
   if (choice === 'gtk') {
@@ -110,7 +102,6 @@ function selectChoice(choice, event) {
   }
 }
 
-// Ana ekrana her dönüşte çağrılır: ilk kez mi, yoksa "welcome back" mı?
 function resetDialogue() {
   const scene = document.getElementById('igor-scene');
   if (!scene) return;
@@ -122,7 +113,7 @@ function resetDialogue() {
   if (choicesContainer) choicesContainer.style.display = 'none';
 }
 
-// --- ÖMER'İN SUBSCRIPTION DİYALOĞU (görsel tabanlı, 2 adım) ---
+// --- ÖMER'İN SUBSCRIPTION DİYALOĞU ---
 let omerDialogueStep = 0;
 
 function advanceOmerDialogue() {
@@ -149,7 +140,7 @@ function showScreen(screenId) {
   if (target) target.classList.add('active');
 
   if (screenId === 'main') {
-    resetDialogue(); // ilk kez mi, "welcome back" mı olduğuna karar verir
+    resetDialogue(); 
   } else {
     hasLeftMainScreen = true;
   }
@@ -244,6 +235,107 @@ document.querySelectorAll('.menu-item, .p5-choice-btn').forEach(item => {
   item.addEventListener('mouseenter', playHoverSound);
 });
 
+// --- "theworld" ZA WARUDO efekti ---
+function playTimeStopSound() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const now = ctx.currentTime;
+    const duration = 3; 
+
+    const bass = ctx.createOscillator();
+    const bassGain = ctx.createGain();
+    bass.type = 'sine';
+    bass.frequency.setValueAtTime(70, now);
+    bassGain.gain.setValueAtTime(0.35, now);
+    bassGain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+    bass.connect(bassGain);
+    bassGain.connect(ctx.destination);
+    bass.start(now);
+    bass.stop(now + duration);
+
+    const tickInterval = 1; 
+    const tickCount = Math.floor(duration / tickInterval);
+    for (let i = 0; i < tickCount; i++) {
+      const t = now + i * tickInterval;
+      const isTick = i % 2 === 0; 
+      const tickOsc = ctx.createOscillator();
+      const tickGain = ctx.createGain();
+      tickOsc.type = 'square';
+      tickOsc.frequency.setValueAtTime(isTick ? 1400 : 1000, t);
+      tickGain.gain.setValueAtTime(0.12, t);
+      tickGain.gain.exponentialRampToValueAtTime(0.001, t + 0.05);
+      tickOsc.connect(tickGain);
+      tickGain.connect(ctx.destination);
+      tickOsc.start(t);
+      tickOsc.stop(t + 0.05);
+    }
+  } catch (e) {}
+}
+
+let timeStopAudioInstance = null;
+let timeStopAudioStopTimer = null;
+
+function playTimeStopAudioFile() {
+  try {
+    const timeStopAudio = new Audio('songs/timestop2.mp3');
+    timeStopAudio.volume = 1;
+    timeStopAudioInstance = timeStopAudio;
+    timeStopAudio.play().catch(() => {});
+
+    if (timeStopAudioStopTimer) clearTimeout(timeStopAudioStopTimer);
+    timeStopAudioStopTimer = setTimeout(() => {
+      timeStopAudio.pause();
+      timeStopAudio.currentTime = 0;
+      timeStopAudioStopTimer = null;
+    }, 17000);
+  } catch (e) {}
+}
+
+let timeStopVisualTimeout = null;
+let timeStopVisualDelayTimer = null;
+let timeStopMusicPrevVolume = null;
+
+function triggerTimeStopEffect() {
+  const jojoText = document.getElementById('jojo-text');
+
+  if (timeStopAudioStopTimer) clearTimeout(timeStopAudioStopTimer);
+  if (timeStopAudioInstance) {
+    timeStopAudioInstance.pause();
+    timeStopAudioInstance.currentTime = 0;
+  }
+
+  playTimeStopAudioFile();
+
+  if (timeStopVisualDelayTimer) clearTimeout(timeStopVisualDelayTimer);
+  if (timeStopVisualTimeout) clearTimeout(timeStopVisualTimeout);
+  document.body.classList.remove('time-stop-invert');
+  if (jojoText) jojoText.classList.remove('visible');
+
+  if (timeStopMusicPrevVolume === null) {
+    timeStopMusicPrevVolume = bgm.volume;
+  }
+  bgm.volume = 0;
+
+  timeStopVisualDelayTimer = setTimeout(() => {
+    document.body.classList.add('time-stop-invert');
+    if (jojoText) jojoText.classList.add('visible');
+
+    timeStopVisualTimeout = setTimeout(() => {
+      document.body.classList.remove('time-stop-invert');
+      if (jojoText) jojoText.classList.remove('visible');
+
+      if (timeStopMusicPrevVolume !== null) {
+        bgm.volume = timeStopMusicPrevVolume;
+        timeStopMusicPrevVolume = null;
+      }
+      sudoMode = false;
+      timeStopVisualTimeout = null;
+    }, 15650);
+
+    timeStopVisualDelayTimer = null;
+  }, 1000);
+}
+
 // --- "sudo", "sudo quit" ve ":q" ---
 let keyBuffer = "";
 let sudoMode = false;
@@ -253,9 +345,9 @@ document.addEventListener('keydown', (e) => {
   keyBuffer += e.key.toLowerCase();
   if (keyBuffer.length > 20) keyBuffer = keyBuffer.slice(-20);
 
-  if (keyBuffer.endsWith("sudo")) {
+  if (keyBuffer.endsWith("theworld") || keyBuffer.endsWith("zawarudo") || keyBuffer.endsWith("the world") || keyBuffer.endsWith("za warudo")) {
     sudoMode = true;
-    console.log("As you wish.");
+    triggerTimeStopEffect();
   }
   
   if (keyBuffer.endsWith("sudo quit") || keyBuffer.endsWith(":q")) {
@@ -263,7 +355,9 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// --- Kaçan "YES, QUIT" Butonu: Kademeli Alay Mesajları ---
+// --- YENİ: Daraltılmış Kaçış Alanı Algoritması ---
+let trollBtnX = 0;
+let trollBtnY = 0;
 let dodgeCount = 0;
 
 function updateQuitMessage(count) {
@@ -275,22 +369,21 @@ function updateQuitMessage(count) {
   } else if (count === 1903) {
     msgEl.textContent = "En Büyük Beşiktaş";
   } else if (count === 987) {
-    msgEl.textContent = "TOOL have used Fibonacci Sequence in their song Lateralus.";
+    msgEl.textContent = "Did you know TOOL have used Fibonacci Sequence in their song Lateralus?";
+  } else if (count > 55) {
+    msgEl.textContent = "Eine halbe Tasse Staubzucker, Einen Viertel Teelöffel Salz, Eine Messerspitze türkisches Haschisch, Ein halbes Pfund Butter, Ein'n Teelöffel Vanillenzucker, Ein halbes Pfund Mehl, Einhundertfünfzig Gramm gemahlene Nüsse, Ein wenig extra Staubzucker, Und keine Eier";
+  } else if (count > 46) {
+    msgEl.textContent = "...Bite my tongue, I wait my turn. I waited for a century. Waste my breath, no lessons learned...";
   } else if (count > 30) {
-    msgEl.textContent = "Just write sudo to stop the button or write sudo quit to quit";
-  // } else if (count === 23) {
-  //  msgEl.textContent = "It’s my birthday YAY";
+    msgEl.textContent = "Just write 'sudo quit' to quit if you don't have a stand to stop the button.";
   } else if (count > 20) {
     msgEl.textContent = "Stop messing around.";
   } else if (count > 10) {
     msgEl.textContent = "Quitting may require a certain command. You don't have one. Or do you??";
   } else if (count > 5) {
-    const pool = [
-      "You shall not pass!",
-    ];
+    const pool = ["You shall not pass!"];
     msgEl.textContent = pool[Math.floor(Math.random() * pool.length)];
   }
-  // count 1-5 arası: mevcut mesaj olduğu gibi kalır
 }
 
 const trollBtn = document.querySelector('.btn-troll-yes');

@@ -5,20 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ömer Kaan Keskiner | CV & Portfolio</title>
   <link rel="icon" type="image/png" href="figures/freehand-crop.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <div id="track-info" class="track-info"></div>
   <button id="audio-toggle" class="audio-toggle" onclick="toggleAudio()" aria-label="Müziği aç/kapat">🔊</button>
-  <!--
-    NOT: "autoplay" özelliği kasıtlı olarak kaldırıldı. O özellik varken
-    tarayıcı, her sekme değişiminde şarkı kaynağı (src) değiştiğinde kendi
-    kendine tekrar çalmaya çalışıyordu; bu da kullanıcı sesi kapatsa bile
-    bir sonraki sekmede sesin kendiliğinden açılmasına yol açıyordu.
-    İlk açılışta sesi başlatma işini script.js zaten kendi mantığıyla
-    (applyTheme + ilk tıklamada devreye giren dinleyici) yapıyor.
-  -->
   <audio id="bgm" loop></audio>
 
   <!-- TAM EKRAN SERTİFİKA GÖRÜNTÜLEYİCİ (MODAL) -->
@@ -30,7 +25,6 @@
   <div id="screen-main" class="screen active">
     <div class="velvet-overlay"></div>
 
-    <!-- P5 Tarzı Seçenekler -->
     <div class="p5-choices-container" id="p5-choices">
       <div class="choice-wrapper">
         <button class="p5-choice-btn" onclick="selectChoice('gtk', event)">
@@ -49,26 +43,7 @@
       </div>
     </div>
 
-    <!-- Igor ve Konuşma Balonu -->
-    <!--
-      NOT: Konuşmalar artık hazır PNG görselleri (karakter + balon + yazı
-      tek karede) ile gösteriliyor. Görselleri kaldırıp eski metin/CSS
-      tabanlı balona dönmek istersen, aşağıdaki eski yapıyı geri getirebilirsin:
-
-      <div class="dialogue-section">
-        <img src="figures/Igor.png" alt="Igor" class="igor-portrait">
-        <div class="p5-dialogue-box" id="igor-dialogue-box" onclick="showChoices()">
-          <div class="speaker-name">Igor</div>
-          <p class="dialogue-text" id="igor-text">Welcome to Ömer’s page... <span class="blink-arrow">▼</span></p>
-        </div>
-      </div>
-
-      Eski istekler (görsellere geçince uygulanamadı, metne dönersen hatırlatma):
-      - Igor'un isim etiketi kırmızı değil MAVİ olmalı (.speaker-name rengi)
-      - "Welcome back" mantığı: script.js içindeki resetDialogue() zaten
-        hasLeftMainScreen bayrağına göre "welcome" / "welcome back" görselini
-        seçiyor; metne dönersen aynı mantıkla igor-text içeriğini değiştir.
-    -->
+    <!-- Igor ve Konuşma Balonu (Görsel) -->
     <div class="dialogue-section">
       <img id="igor-scene" class="dialogue-scene" src="speech/igor-welcome.png" alt="Igor" onclick="showChoices()">
     </div>
@@ -113,7 +88,6 @@
           <h3>SKILLS</h3>
           <ul class="skills-list">
             <li><strong>Electronics:</strong> KiCad schematic &amp; PCB design, detector electronics, analog/digital circuit design, soldering</li>
-            <li><strong>Instrumentation:</strong> LVDS window-comparator &amp; Time-over-Threshold discriminator design for radiation detectors</li>
             <li><strong>Programming:</strong> C, C++, MATLAB, LaTeX, Linux</li>
             <li><strong>Scientific Tools:</strong> ROOT, Geant4, Qiskit fundamentals</li>
             <li><strong>Prototyping:</strong> Robotics, 3D printing, electronics integration</li>
@@ -127,12 +101,12 @@
           <div class="project-card">
             <h4>Guest Researcher <span class="date">Jul 2026-Present</span></h4>
             <p class="org">İZÜ NAR - Nuclear Detectors and Robotics Research Center, Küçükçekmece, Istanbul</p>
-            <p>Conducting M.Sc. thesis research while contributing to nuclear and particle-physics projects.</p>
+            <p>Working on my M.Sc. thesis research while contributing to nuclear and particle-physics projects. At IZU Nuclear Detectors and Robotics Research and Application Center.</p>
           </div>
           <div class="project-card">
             <h4>Part-Time Student Researcher <span class="date">Feb 2024-Jul 2026</span></h4>
             <p class="org">İZÜ NAR, Istanbul</p>
-            <p>Worked at the intersection of nuclear electronics, particle physics, and robotics. Designed KiCad schematics and PCBs, fabricated boards, and used MATLAB simulations to turn concepts into prototypes.</p>
+            <p>Worked at the intersection of nuclear electronics, particle physics, and robotics. Designed KiCad schematics and PCBs, and used MATLAB simulations.</p>
           </div>
           <div class="project-card">
             <h4>Volunteer Intern <span class="date">Jul 2023-Feb 2024</span></h4>
@@ -157,11 +131,12 @@
           <div class="project-card">
             <h4>M.Sc. in Nuclear Energy Engineering <span class="date">Jul 2026-Jun 2028</span></h4>
             <p class="org">Istanbul Technical University, Istanbul</p>
+	    <p>Studying Nuclear Engineering and focused on nuclear detectors and intrumentations to study neutrons and muons.</p>
           </div>
           <div class="project-card">
             <h4>B.Sc. in Electrical and Electronics Engineering <span class="date">Sep 2022-Jul 2026</span></h4>
             <p class="org">Istanbul Sabahattin Zaim University, Halkalı, Istanbul</p>
-            <p>Attended seminars on physics, technology, and AI; served on the RAS Committee of the IZU IEEE Student Branch.</p>
+            <p>Gained my Bachelor's Degree on Electrical and Electronics Engineering. Attended seminars on physics, technology, and AI; served on the RAS Committee of the IZU IEEE Student Branch as well as IZU Music Club as the guitarist and drummer.</p>
           </div>
           <div class="project-card">
             <h4>High School Diploma <span class="date">Sep 2018-Jun 2022</span></h4>
@@ -173,20 +148,34 @@
         <div id="equip" class="section-content">
           <h2>EQUIPPED PROJECTS</h2>
           <div class="project-card">
-            <h4>ToT Discriminator Boards for Radiation Detectors <span class="date">2025-2026</span></h4>
-            <p>Graduation/senior project. Designed and fabricated an LVDS-based window-comparator and ToT discriminator PCB at İZÜ NAR.</p>
+            <h4>Designing and Developing a ToT Discriminator Board for Radiation Detectors <span class="date">2025-2026</span></h4>
+            <p>Graduation/senior project. Designed and fabricated an LVDS-based window-comparator and Time-over-Threshold discriminator PCB at İZÜ NAR.</p>
+	    <a href="https://nar.izu.edu.tr" target="_blank" rel="noopener">Details</a>
+          </div>
+	<div class="project-card">
+            <h4>Triangala <span class="date">On Going</span></h4>
+            <p>Working on a TD-learning based agent for classic Turkish game, Mangala for 3+ players.</p>
+	    <a href="https://github.com/pisanzapra/triangala" target="_blank" rel="noopener">GitHub</a>
+          </div>
+          <div class="project-card">
+            <h4>PETcycle <span class="date">On Going</span></h4>
+            <p>currently working on recycling PET-based materials and outdated scintillators with the aim of repurposing them for advanced applications. The project involves processing these materials to make them suitable for 3D printing and fabricating new, efficient scintillators.</p>
+	    <a href="https://nar.izu.edu.tr" target="_blank" rel="noopener">Details</a>
           </div>
           <div class="project-card">
             <h4>PlatformBot <span class="date">2024</span></h4>
-            <p>Robot capable of random navigation within a defined area, with an IMU-based, three-axis dynamic landing platform.</p>
+            <p>Developed an UGV (Unmanned Ground Vehicle) capable of random navigation within a defined area, with an IMU-based, three-axis dynamic landing platform simulating the sea surface and its randomness.</p>
+	    <a href="https://github.com/pisanzapra/platformbot" target="_blank" rel="noopener">GitHub</a>
           </div>
           <div class="project-card">
             <h4>Absolute C-Nema <span class="date">2024</span></h4>
             <p>Cross-platform cinema-management application built in C++ for Windows and Linux.</p>
+	    <a href="https://github.com/pisanzapra/absolute_c-nema" target="_blank" rel="noopener">GitHub</a>
           </div>
           <div class="project-card">
             <h4>My Limitless Holiday <span class="date">2018-2019</span></h4>
-            <p>MIT App Inventor application supporting inclusive holidays for people with disabilities.</p>
+            <p>Developed a mobile application included with many sensors and indicators supporting inclusive holidays for people with disabilities. Developed for Android as a proof of concept.</p>
+	    <a href="https://github.com/pisanzapra/TatilimEngelsiz" target="_blank" rel="noopener">GitHub</a>
           </div>
         </div>
 
@@ -200,12 +189,10 @@
                   <h2>ACHIEVEMENTS</h2>
                   <button class="flip-btn" onclick="flipCard()">SHOW CERTIFICATES ➔</button>
                 </div>
-                <p>• YEFİST 2026 - HEP Istanbul Workshop: Local Organizing Committee member &amp; presenter (Jun 13-14, 2026)</p>
+                <p>• YEFİST 2026 - HEP Istanbul Workshop: Local Organizing Committee member &amp; presenter.</p>
                 <p>• YEFİST 2025 - HEP Istanbul Workshop: Local Organizing Committee member</p>
                 <p>• YEFİST 2023 - HEP Istanbul Workshop: Participant</p>
                 <p>• Üsküdar University 7th Science and Ideas Festival Award (2019): Medal &amp; certificate for "My Limitless Holiday"</p>
-                <p>• RAS Committee member, IZU IEEE Student Branch</p>
-                <p>• Graduation Thesis Project on radiation-detector electronics</p>
               </div>
               <!-- KARTIN ARKA YÜZÜ: CERTIFICATES -->
               <div class="quest-card-back">
@@ -230,9 +217,9 @@
         <div id="system" class="section-content">
           <h2>INTERESTS &amp; CONTACT</h2>
           <p><strong>Hobbies:</strong> Video games, music &amp; musical instruments, reading, drawing</p>
-	        <p><strong>Music:</strong> King Crimson, TOOL, Dream Theater, The Strokes, Yes, Porcupine Tree, Rush, Bowie</p>
+	        <p><strong>Bands:</strong> King Crimson, TOOL, Dream Theater, The Strokes, Yes, Porcupine Tree, Rush</p>
 	        <p><strong>Instruments:</strong> Drums, Electric Guitar, Classical Guitar, Bass</p>
-	        <p><strong>Contact:</strong>
+	        <p class="contact-block"><strong>Contact:</strong>
             <a href="mailto:keskineromerkaan@gmail.com">keskineromerkaan@gmail.com</a> |
             <a href="https://github.com/pisanzapra" target="_blank" rel="noopener">GitHub</a> |
             <a href="https://linkedin.com/in/omer-kaan-keskiner" target="_blank" rel="noopener">LinkedIn</a> |
@@ -246,29 +233,14 @@
   </div>
 
   <!-- SUBSCRIPTION -->
-  <!--
-    NOT: Ömer'in konuşması da artık hazır PNG (karakter+balon+yazı) ile
-    gösteriliyor, tıklayınca 2. göreve (subscribe pitch) geçiyor. Eski
-    metin/CSS tabanlı balona dönmek istersen:
-
-    <div class="subscription-dialogue">
-      <img src="speech/omer_speech.png" alt="Ömer Kaan Keskiner" class="subscription-avatar">
-      <div class="subscription-bubble">
-        <div class="speaker-name">Ömer Kaan</div>
-        <p>If you want to know more about me in person, please subscribe monthly for more and be my only fan. 😉</p>
-        <button class="fake-subscribe-btn">Subscribe: ₺97.000/month</button>
-        <p class="exes-note">...or, for a more "detailed" review, feel free to contact one of my exes.</p>
-      </div>
-    </div>
-  -->
   <div id="screen-subscription" class="screen">
     <button class="back-btn" onclick="showScreen('main')">◀ MENU</button>
     <div class="subscription-dialogue">
       <img id="omer-scene" class="dialogue-scene" src="speech/omer-hello.png" alt="Ömer Kaan Keskiner" onclick="advanceOmerDialogue()">
     </div>
     <div id="subscribe-actions" class="subscribe-actions">
-      <button class="fake-subscribe-btn">Subscribe: ₺97.000/month</button>
-      <p class="exes-note">...or, for a more "detailed" review, feel free to contact one of my exes.</p>
+      <button class="fake-subscribe-btn">Subscribe</button>
+      <p class="exes-note">...or, for a more detailed review, feel free to contact one of my exes.</p>
     </div>
   </div>
 
@@ -285,7 +257,7 @@
       </div>
     </div>
   </div>
-
+    <div id="jojo-text" class="jojo-text">Time Has Stopped For 9 Seconds</div>
   <script src="script.js"></script>
 </body>
 </html>

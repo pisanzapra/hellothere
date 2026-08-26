@@ -2,18 +2,44 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Impact', 'Arial Black', sans-serif;
+  font-family: 'Anton', 'Impact', 'Arial Black', sans-serif;
 }
 
 body {
   background-color: #1a0508;
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent  1.3px);
-  background-size: 14px 14px;
   min-height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
   color: #fff;
   transition: background-color 0.5s ease;
+}
+
+/* ========================================================
+   ARKAPLAN YILDIZ EFEKTİ (P5 STARS)
+======================================================== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  
+  /* --- ESKİ NOKTALI ARKA PLAN (YORUM SATIRI) --- 
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1.3px);
+  background-size: 14px 14px;
+  -webkit-mask-image: radial-gradient(ellipse at center, transparent 38%, black 82%);
+          mask-image: radial-gradient(ellipse at center, transparent 38%, black 82%);
+  ------------------------------------------------ */
+
+  /* --- YENİ PERSONA 5 YILDIZLI ARKA PLAN --- */
+  background-image: url('figures/prsona5_stars.jpg');
+  background-size: cover;
+  background-position: center;
+  
+  /* JS'den gelen değişen arkaplan renklerinin yıldızlarla harmanlanması için: */
+  opacity: 0.35; 
+  mix-blend-mode: screen; 
+  
+  pointer-events: none;
+  z-index: -1;
 }
 
 /* --- Müzik Arayüzü --- */
@@ -103,28 +129,24 @@ body {
   z-index: 30;
 }
 
-
-
-
-/* Düz Biten Butonlar - Siyah Idle, Kırmızı Hover */
 .p5-choice-btn {
-  background-color: #000; /* Başlangıçta Siyah */
+  background-color: #000; 
   color: #fff;
   border: 3px solid #fff; 
   padding: 15px 40px;
   font-size: 1.6rem;
   cursor: pointer;
   transform: skewX(-15deg); 
-  box-shadow: 8px 8px 0px #e60012; /* Kırmızı Gölge */
+  box-shadow: 8px 8px 0px #122594; 
   transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .p5-choice-btn:hover {
-  background-color: #e60012; /* Üzerine gelince Kırmızı */
+  background-color: #081d8c; 
   color: #fff;
   border-color: #fff;
   transform: skewX(-15deg) scale(1.05) translateX(-10px);
-  box-shadow: -8px 8px 0px #000; /* Üzerine gelince Siyah Gölge */
+  box-shadow: -8px 8px 0px #000; 
 }
 
 .p5-choice-text {
@@ -133,7 +155,6 @@ body {
   font-weight: bold;
 }
 
-/* P5 Diyalog Bölümü */
 .dialogue-section {
   position: absolute;
   bottom: 10px;
@@ -145,7 +166,6 @@ body {
   width: 90%;
 }
 
-/* Tek parça diyalog sahnesi (karakter + balon + yazı, hazır görsel) */
 .dialogue-scene {
   width: 95%;
   max-width: 1100px;
@@ -154,91 +174,10 @@ body {
   cursor: pointer;
   filter: drop-shadow(5px 5px 0px rgba(0, 0, 0, 0.6));
   transition: transform 0.2s ease;
-  // animation: float 4s ease-in-out infinite;
 }
 
 .dialogue-scene:hover {
   transform: scale(1.01);
-}
-
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
-}
-
-/*
-  AŞAĞIDAKİ ESKİ METİN/CSS TABANLI BALON KURALLARI ARTIK KULLANILMIYOR
-  (görseller devredeyken .igor-portrait / .p5-dialogue-box / .speaker-name /
-  .dialogue-text / .blink-arrow için karşılık gelen HTML yok). Görselleri
-  kaldırıp metne dönersen bu kurallar hâlâ burada, direkt kullanılabilir.
-
-  Not: .speaker-name rengi kullanıcı isteğiyle KIRMIZI'dan MAVİ'ye
-  güncellendi ("Igor'un ismi kırmızı değil mavi olmalı") — görseller
-  aktifken bunun bir etkisi yok, çünkü isim artık görselin içine gömülü.
-*/
-.igor-portrait {
-  width: 450px; 
-  filter: drop-shadow(5px 5px 0px rgba(0,0,0,0.8));
-  z-index: 12;
-  position: relative;
-  top: 30px;
-  animation: float 4s ease-in-out infinite;
-}
-
-.p5-dialogue-box {
-  position: relative;
-  background-color: rgba(0, 0, 0, 0.95);
-  border: 4px solid #fff;
-  border-radius: 15px 0 40px 0; 
-  color: #fff;
-  padding: 40px 50px;
-  width: 100%;
-  max-width: 950px; 
-  transform: skewX(-4deg) perspective(100px) rotateX(1deg);
-  box-shadow: 10px 10px 0px rgba(0,0,0,0.6);
-  margin-bottom: 30px;
-  z-index: 11;
-  cursor: pointer;
-  transition: border-color 0.2s;
-}
-
-.p5-dialogue-box:hover {
-  border-color: #e60012;
-}
-
-.speaker-name {
-  position: absolute;
-  top: -30px;
-  left: 20px;
-  background-color: #000;
-  color: #2a7fff; /* İSTEK: kırmızı değil mavi */
-  border: 3px solid #fff;
-  padding: 5px 25px;
-  font-size: 1.8rem;
-  transform: skewX(10deg); 
-  letter-spacing: 2px;
-  box-shadow: 4px 4px 0px rgba(0,0,0,0.6);
-}
-
-.dialogue-text {
-  font-family: 'Georgia', 'Times New Roman', serif; 
-  font-size: 2rem; 
-  font-style: italic;
-  transform: skewX(4deg); 
-  line-height: 1.6;
-}
-
-.blink-arrow {
-  color: #e60012;
-  animation: blink  1.3s infinite;
-  display: inline-block;
-  margin-left: 10px;
-  font-family: sans-serif;
-}
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
 }
 
 /* ========================================================
@@ -277,8 +216,6 @@ body {
   padding: 0;
 }
 
-/* --- Subscription: Konuşma Balonlu Sunum (görsel tabanlı, Igor ile aynı mantık) --- */
-/* Konuşma görseli Igor'unki gibi ekranın altına sabitlenir, hiç kıpırdamaz */
 .subscription-dialogue {
   position: absolute;
   bottom: 10px;
@@ -289,10 +226,6 @@ body {
   z-index: 10;
 }
 
-/* .dialogue-scene stili (yukarıda tanımlı) burada da kullanılıyor */
-
-/* Subscribe butonu + exes notu: konuşma görselinden bağımsız, ekranın
-   ortasında belirir (görsel yerinden kımıldamaz) */
 .subscribe-actions {
   position: absolute;
   top: 50%;
@@ -319,6 +252,7 @@ body {
   justify-content: center;
   text-align: center;
   padding: 40px 5%;
+  position: relative;
 }
 
 .quit-box {
@@ -329,8 +263,53 @@ body {
   box-shadow: 10px 10px 0px #e60012;
 }
 
+/* --- "theworld" easter egg --- */
+body.time-stop-invert {
+  filter: invert(1) hue-rotate(180deg);
+  transition: filter 0.12s ease-out;
+}
+
+body.time-stop-invert *:not(.jojo-text):not(.btn-troll-yes) {
+  animation-play-state: paused !important;
+  transition: none !important;
+  pointer-events: none !important;
+}
+
+body.time-stop-invert .btn-troll-yes {
+  transition: none !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+.jojo-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
+  font-family: 'Anton', 'Impact', sans-serif;
+  font-size: 2rem;
+  color: #ffe600;
+  text-shadow:
+    -2px -2px 0 #000,
+     2px -2px 0 #000,
+    -2px  2px 0 #000,
+     2px  2px 0 #000,
+     0 0 22px rgba(255, 230, 0, 0.85);
+  letter-spacing: 1px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 20;
+  white-space: nowrap;
+  transition: opacity 0.15s ease-out, transform 0.15s ease-out;
+}
+
+.jojo-text.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
 .quit-box h2 {
-  font-family: 'Impact', sans-serif;
+  font-family: 'Anton', 'Impact', sans-serif;
   font-size: 2.2rem;
   color: #e60012;
   margin-bottom: 20px;
@@ -338,44 +317,8 @@ body {
 
 .quit-box p {
   line-height: 1.6;
-  font-family: 'Impact', sans-serif;
+  font-family: 'Anton', 'Impact', sans-serif;
   font-size: 1.1rem;
-}
-
-/*
-  ESKİ metin/CSS tabanlı subscription balonu artık kullanılmıyor (görsel
-  devrede). Görselleri kaldırırsan aşağıdaki kurallar hâlâ hazır:
-*/
-.subscription-avatar {
-  width: 450px; 
-  z-index: 12;
-  position: relative;
-  top: 30px;
-}
-
-.subscription-bubble {
-  position: relative;
-  background-color: rgba(0, 0, 0, 0.95);
-  border: 4px solid #fff;
-  border-radius: 15px 0 40px 0;
-  color: #fff;
-  padding: 40px 45px 35px;
-  flex: 1;
-  min-width: 300px;
-  box-shadow: 10px 10px 0px #e60012;
-  margin-bottom: 20px;
-}
-
-.subscription-bubble p {
-  font-family: 'Georgia', 'Times New Roman', serif;
-  font-size: 1.35rem;
-  line-height: 1.6;
-  margin: 0 0 18px 0;
-  text-align: left;
-}
-
-.subscription-bubble .exes-note {
-  margin: 10px 0 0 0;
 }
 
 .fake-subscribe-btn {
@@ -386,7 +329,7 @@ body {
   color: #fff;
   border: none;
   font-size: 1.05rem;
-  font-family: 'Impact', sans-serif;
+  font-family: 'Anton', 'Impact', sans-serif;
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.15s ease;
@@ -477,7 +420,6 @@ body {
   z-index: 10; 
 }
 
-/* Tamamen Köşeli, Beyaz Çerçeveli Buton Yapısı */
 .menu-item {
   --angle: 0deg;
   --radius: 20px; 
@@ -488,11 +430,8 @@ body {
   height: 60px;
   background-color: #000; 
   color: #fff;
-  
-  /* Üst, Sağ, Alt sınırları net beyaz */
   border: 3px solid #fff; 
-  border-left: none; /* Sol ucu sivri eklenti ile kapatacağız */
-  
+  border-left: none; 
   padding: 0 22px 0 15px; 
   font-size:  1.35rem;
   display: flex;
@@ -501,16 +440,12 @@ body {
   cursor: pointer;
   transform-origin: 0% 50%; 
   transform: rotate(var(--angle)) translateX(var(--radius));
-  
-  /* Tüm şekli kaplayan mükemmel kırmızı gölge */
   filter: drop-shadow(6px 6px 0px #e60012);
-  
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* SİVRİ SOL UÇ: Dıştaki Beyaz Katman (Çerçeveyi Sağlar) */
 .menu-item::before {
   content: "";
   position: absolute;
@@ -519,11 +454,9 @@ body {
   bottom: -3px; 
   width: 20px;
   background-color: #fff;
-  /* Yarısı olmayan ok şekli */
   clip-path: polygon(100% 0, 100% 100%, 0 100%);
 }
 
-/* SİVRİ SOL UÇ: İçteki Siyah Katman */
 .menu-item::after {
   content: "";
   position: absolute;
@@ -532,20 +465,17 @@ body {
   bottom: 0; 
   width: 15px;
   background-color: #000;
-  /* Yarısı olmayan ok şekli */
   clip-path: polygon(100% 0, 100% 100%, 0 100%);
   transition: background-color 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* TERS RENKLİ KUTUCUK (Düz, İtalik Değil) */
 .inverted-letter {
   background-color: #fff;
   color: #000;
   padding: 0 4px;
   margin: 0 2px;
   display: inline-block;
-  transform: scale(1.1); /* Skew (İtalik/Eğiklik) tamamen silindi */
-  box-shadow: 2px 2px 0px #e60012;
+  transform: scale(1.1); 
   transition: all 0.2s ease;
   font-style: normal;
 }
@@ -557,7 +487,6 @@ body {
 .persona-menu .menu-item:nth-child(5) { --angle: -85deg; }
 .persona-menu .menu-item:nth-child(6) { --angle: -105deg; }
 
-/* HOVER DURUMU */
 .menu-container:hover .menu-item {
   opacity: 1;
   visibility: visible;
@@ -567,14 +496,12 @@ body {
 
 .menu-item:hover {
   background-color: #e60012; 
-  color: #fff;
   --radius: 150px; 
   transform: rotate(var(--angle)) translateX(var(--radius)) scale(1.1);
-  filter: drop-shadow(-6px 6px 0px #000); /* Hover'da Siyah Gölge */
+  filter: drop-shadow(-6px 6px 0px #000); 
   z-index: 30; 
 }
 
-/* Hover olduğunda sol uçtaki siyah üçgen de kırmızıya dönsün */
 .menu-item:hover::after {
   background-color: #e60012;
 }
@@ -584,8 +511,6 @@ body {
   color: #fff;
   box-shadow: 2px 2px 0px #fff;
 }
-
-
 /* --- Sağ Bilgi Kutusu --- */
 .content-panel {
   flex: 1;
@@ -611,6 +536,16 @@ body {
   display: block;
 }
 
+#system.active {
+  display: flex;
+  flex-direction: column;
+}
+.contact-block {
+  margin-top: auto; 
+  padding-top: 35px;
+  border-top: 2px dashed #444; 
+}
+
 .stats-logos {
   position: absolute;
   top: 30px;
@@ -629,7 +564,7 @@ body {
 .logo-badge { display: none; }
 
 .section-content h2 {
-  font-family: 'Impact', sans-serif;
+  font-family: 'Anton', 'Impact', sans-serif;
   font-size: 2.5rem;
   color: #e60012;
   margin-bottom: 20px;
@@ -859,6 +794,143 @@ hr {
   color: #fff;
   font-size: 2rem;
   margin-top: 20px;
-  font-family: 'Impact';
+  font-family: 'Anton', 'Impact';
   letter-spacing: 2px;
+}
+
+/* ============================================================
+   RESPONSIVE / FARKLI CİHAZ-TARAYICI UYUMU
+   ============================================================ */
+img { max-width: 100%; height: auto; }
+
+@media (max-width: 1024px) {
+  html { font-size: 15px; }
+}
+@media (max-width: 640px) {
+  html { font-size: 13px; }
+}
+@media (max-width: 380px) {
+  html { font-size: 11.5px; }
+}
+
+@media (max-width: 900px) {
+  #screen-gtk.active {
+    flex-direction: column;
+    padding: 90px 5% 40px;
+  }
+  .persona-container {
+    flex-direction: column;
+    padding-left: 0;
+    max-width: 100%;
+  }
+  .content-panel {
+    transform: none; 
+    box-shadow: 6px 6px 0px #e60012;
+  }
+  #screen-main.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px 4% 12px;
+  }
+  .p5-choices-container {
+    position: relative;
+    top: auto;
+    right: auto;
+    left: auto;
+    width: 100%;
+    align-items: stretch;
+    margin-bottom: 15px;
+  }
+  .p5-choice-btn {
+    width: 100%;
+    padding: 14px 22px;
+    font-size: 1.25rem;
+    transform: skewX(-10deg);
+  }
+  .p5-choice-btn:hover {
+    transform: skewX(-10deg) scale(1.02);
+  }
+  .dialogue-section {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px), (pointer: coarse) {
+  .menu-container {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    margin: 0 auto 25px;
+    z-index: 2;
+  }
+  .avatar-img { display: none; }
+  .persona-menu {
+    position: static;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .menu-item,
+  .menu-container:hover .menu-item,
+  .menu-item:hover {
+    position: static !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    width: 100%;
+    margin-left: 20px; 
+  }
+  .menu-item:hover {
+    filter: drop-shadow(-4px 4px 0px #000);
+  }
+}
+
+@media (max-width: 640px) {
+  .back-btn { padding: 6px 14px; font-size: 0.9rem; }
+  .audio-toggle { width: 38px; height: 38px; font-size: 1.1rem; }
+  .track-info {
+    right: 64px;
+    max-width: 52vw;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .section-content { padding: 20px; }
+  .stats-logos {
+    position: static;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+  .stats-logos .uni-logo { height: 46px !important; }
+  .stats-header {
+    justify-content: center;
+    text-align: center;
+  }
+  .quit-box, .subscribe-actions { padding-left: 5px; padding-right: 5px; }
+  .quit-box { padding: 25px; }
+  .jojo-text { font-size: 1.1rem; white-space: normal; width: 90%; }
+  .cert-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .dialogue-section, .subscription-dialogue {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+    padding-bottom: 6px;
+  }
+  .dialogue-scene { min-width: 480px; width: auto; max-width: none; }
+  .quest-card, .quest-card-inner { min-height: 760px; }
+}
+
+@media (max-width: 420px) {
+  .cert-grid { grid-template-columns: 1fr; }
 }
