@@ -1,4 +1,4 @@
-// Tema (arkaplan rengi + müzik)
+// ---- Tema (arkaplan rengi + müzik) haritası ----
 const themeMap = {
   main:         { color: '#1a0508', track: 'songs/aria.mp3', song: 'Aria of The Soul', artist: 'Shoji Meguro' },
   stats:        { color: '#2a0a0d', track: 'songs/specialist.mp3', song: 'specialist', artist: 'ATLUS Sound Team' },
@@ -72,7 +72,7 @@ function toggleAudio() {
   }
 }
 
-// görsel tabanli igor (igorsel)
+// --- IGOR İNTERAKTİF SOHBET SİSTEMİ (görsel tabanlı) ---
 let hasLeftMainScreen = false; 
 
 function showChoices() {
@@ -113,7 +113,7 @@ function resetDialogue() {
   if (choicesContainer) choicesContainer.style.display = 'none';
 }
 
-// benim diyalog
+// --- ÖMER'İN SUBSCRIPTION DİYALOĞU ---
 let omerDialogueStep = 0;
 
 function advanceOmerDialogue() {
@@ -132,7 +132,7 @@ function resetOmerDialogue() {
   if (actions) actions.classList.remove('visible');
 }
 
-// ekran geçişi
+// --- EKRAN GEÇİŞLERİ ---
 function showScreen(screenId) {
   playSelectSound();
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -235,7 +235,7 @@ document.querySelectorAll('.menu-item, .p5-choice-btn').forEach(item => {
   item.addEventListener('mouseenter', playHoverSound);
 });
 
-// the world stand efekti
+// --- "theworld" ZA WARUDO efekti ---
 function playTimeStopSound() {
   try {
     const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -336,7 +336,7 @@ function triggerTimeStopEffect() {
   }, 1000);
 }
 
-// "theworld", "sudo quit" ve ":q"
+// --- "sudo", "sudo quit" ve ":q" ---
 let keyBuffer = "";
 let sudoMode = false;
 
@@ -355,7 +355,7 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// escape room
+// --- YENİ: Daraltılmış Kaçış Alanı Algoritması ---
 let trollBtnX = 0;
 let trollBtnY = 0;
 let dodgeCount = 0;

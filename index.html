@@ -16,12 +16,12 @@
   <button id="audio-toggle" class="audio-toggle" onclick="toggleAudio()" aria-label="Müziği aç/kapat">🔊</button>
   <audio id="bgm" loop></audio>
 
-  <!-- setifika goruntuleme -->
+  <!-- TAM EKRAN SERTİFİKA GÖRÜNTÜLEYİCİ (MODAL) -->
   <div id="cert-modal" class="modal" onclick="closeModal()">
     <img id="modal-img" src="" alt="Certificate">
   </div>
 
-  <!-- velvet room menusu -->
+  <!-- ANA MENÜ (VELVET ROOM) -->
   <div id="screen-main" class="screen active">
     <div class="velvet-overlay"></div>
 
@@ -43,13 +43,13 @@
       </div>
     </div>
 
-    <!-- igor dırdır yapıyor -->
+    <!-- Igor ve Konuşma Balonu (Görsel) -->
     <div class="dialogue-section">
       <img id="igor-scene" class="dialogue-scene" src="speech/igor-welcome.png" alt="Igor" onclick="showChoices()">
     </div>
   </div>
 
-  <!-- beni taniyin -->
+  <!-- GET TO KNOW ME -->
   <div id="screen-gtk" class="screen">
     <button class="back-btn" onclick="showScreen('main')">◀ MENU</button>
     
@@ -66,10 +66,10 @@
     </div>
 
     <div class="persona-container">
-      <!-- icerik paneli -->
+      <!-- Sağ Detay Paneli -->
       <div id="content-panel" class="content-panel">
 
-        <!-- STATS / hakkimda -->
+        <!-- STATS / ABOUT -->
         <div id="stats" class="section-content active">
           <div class="stats-logos">
             <img class="uni-logo" src="figures/itu-logo.png" alt="İTÜ logo">
@@ -95,7 +95,7 @@
           </ul>
         </div>
 
-        <!-- WORK / is gecmisim -->
+        <!-- WORK / EMPLOYMENT HISTORY -->
         <div id="work" class="section-content">
           <h2>EMPLOYMENT HISTORY</h2>
           <div class="project-card">
@@ -125,7 +125,7 @@
           </div>
         </div>
 
-        <!-- EDU / egitim -->
+        <!-- EDU / EDUCATION -->
         <div id="edu" class="section-content">
           <h2>EDUCATION</h2>
           <div class="project-card">
@@ -144,7 +144,7 @@
           </div>
         </div>
 
-        <!-- EQUIP / projeler -->
+        <!-- EQUIP / PROJECTS -->
         <div id="equip" class="section-content">
           <h2>EQUIPPED PROJECTS</h2>
           <div class="project-card">
@@ -179,11 +179,11 @@
           </div>
         </div>
 
-        <!-- QUESTS (basarilar & sertifika) -->
+        <!-- QUESTS (ACHIEVEMENTS & CERTS) -->
         <div id="quests" class="section-content">
           <div class="quest-card">
             <div class="quest-card-inner">
-              <!-- kartin on tarfi: ACHIEVEMENTS -->
+              <!-- KARTIN ÖN YÜZÜ: ACHIEVEMENTS -->
               <div class="quest-card-front">
                 <div class="card-header-flex">
                   <h2>ACHIEVEMENTS</h2>
@@ -194,7 +194,7 @@
                 <p>• YEFİST 2023 - HEP Istanbul Workshop: Participant</p>
                 <p>• Üsküdar University 7th Science and Ideas Festival Award (2019): Medal &amp; certificate for "My Limitless Holiday"</p>
               </div>
-              <!-- kartin arka tarafi: CERTIFICATES -->
+              <!-- KARTIN ARKA YÜZÜ: CERTIFICATES -->
               <div class="quest-card-back">
                 <div class="card-header-flex">
                   <h2>CERTIFICATES</h2>
@@ -213,7 +213,7 @@
           </div>
         </div>
 
-        <!-- SYSTEM / hobiler & iletisim -->
+        <!-- SYSTEM / HOBBIES & CONTACT -->
         <div id="system" class="section-content">
           <h2>INTERESTS &amp; CONTACT</h2>
           <p><strong>Hobbies:</strong> Video games, music &amp; musical instruments, reading, drawing</p>
@@ -232,7 +232,7 @@
     </div>
   </div>
 
-  <!-- abonelik -->
+  <!-- SUBSCRIPTION -->
   <div id="screen-subscription" class="screen">
     <button class="back-btn" onclick="showScreen('main')">◀ MENU</button>
     <div class="subscription-dialogue">
@@ -244,7 +244,7 @@
     </div>
   </div>
 
-  <!-- sıkıyorsa çık -->
+  <!-- QUIT -->
   <div id="screen-quit" class="screen">
     <div class="quit-box">
       <h2>ARE YOU SURE?</h2>

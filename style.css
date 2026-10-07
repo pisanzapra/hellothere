@@ -14,26 +14,27 @@ body {
   transition: background-color 0.5s ease;
 }
 
-/* Arkaplan Yıldız (P5 STARS)*/
+/* ========================================================
+   ARKAPLAN YILDIZ EFEKTİ (P5 STARS)
+======================================================== */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   
-  /* eski noktalı arkaplan - yorumlandi --- 
-  
+  /* --- ESKİ NOKTALI ARKA PLAN (YORUM SATIRI) --- 
   background-image: radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1.3px);
   background-size: 14px 14px;
   -webkit-mask-image: radial-gradient(ellipse at center, transparent 38%, black 82%);
           mask-image: radial-gradient(ellipse at center, transparent 38%, black 82%);
   ------------------------------------------------ */
 
-  /* persona5 yildizli arkaplan */
+  /* --- YENİ PERSONA 5 YILDIZLI ARKA PLAN --- */
   background-image: url('figures/prsona5_stars.jpg');
   background-size: cover;
   background-position: center;
   
-  /* değişen arkaplan renklerinin yıldızlarla harmanlanması için */
+  /* JS'den gelen değişen arkaplan renklerinin yıldızlarla harmanlanması için: */
   opacity: 0.35; 
   mix-blend-mode: screen; 
   
@@ -41,7 +42,7 @@ body::before {
   z-index: -1;
 }
 
-/* müzik guiino */
+/* --- Müzik Arayüzü --- */
 .music-player-ui {
   position: fixed;
   top: 20px;
@@ -99,7 +100,9 @@ body::before {
   display: block; 
 }
 
-/* main menu (velvet room & P5 ui) */
+/* ========================================================
+   ANA MENÜ (VELVET ROOM & P5 UI) 
+======================================================== */
 #screen-main {
   background-image: url('figures/velvet_room.jpeg'); 
   background-size: cover;
@@ -177,7 +180,9 @@ body::before {
   transform: scale(1.01);
 }
 
-/* diger ekranlar (get to know (gtk), subsc, quit) */
+/* ========================================================
+   DİĞER EKRANLAR (GTK, SUBSCRIPTION, QUIT)
+======================================================== */
 #screen-gtk.active {
   display: flex;
   align-items: center;
@@ -258,7 +263,7 @@ body::before {
   box-shadow: 10px 10px 0px #e60012;
 }
 
-/* "theworld" easter eggi */
+/* --- "theworld" easter egg --- */
 body.time-stop-invert {
   filter: invert(1) hue-rotate(180deg);
   transition: filter 0.12s ease-out;
@@ -367,7 +372,9 @@ body.time-stop-invert .btn-troll-yes {
   transition: opacity 0.2s ease, transform 0.2s ease !important;
 }
 
-/* persona 5 gibi cicekli menü */
+/* ========================================================
+   ÇİÇEK MENÜ (BEYAZ ÇERÇEVELİ, YARIM OKLU)
+======================================================== */
 .persona-container {
   position: relative; 
   display: flex;
@@ -504,7 +511,7 @@ body.time-stop-invert .btn-troll-yes {
   color: #fff;
   box-shadow: 2px 2px 0px #fff;
 }
-/* info box */
+/* --- Sağ Bilgi Kutusu --- */
 .content-panel {
   flex: 1;
   border: 4px solid #fff;
@@ -663,7 +670,7 @@ hr {
   text-decoration: underline;
 }
 
-/* cift tarafli bant */
+/* --- Çift Taraflı Achievements / Certs Kartı --- */
 .quest-card {
   perspective: 1000px;
   width: 100%;
@@ -756,7 +763,7 @@ hr {
   box-shadow: 6px 10px 0px #e60012;
 }
 
-/* tam ekran cert/modal */
+/* Tam Ekran Modal */
 .modal {
   display: none;
   position: fixed;
@@ -791,7 +798,9 @@ hr {
   letter-spacing: 2px;
 }
 
-/* responsive/farkli cihaz uyumu */
+/* ============================================================
+   RESPONSIVE / FARKLI CİHAZ-TARAYICI UYUMU
+   ============================================================ */
 img { max-width: 100%; height: auto; }
 
 @media (max-width: 1024px) {
