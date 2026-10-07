@@ -350,9 +350,11 @@ document.addEventListener('keydown', (e) => {
     triggerTimeStopEffect();
   }
   
-  if (keyBuffer.endsWith("sudo quit") || keyBuffer.endsWith(":q")) {
-    try { window.close(); } catch(err) {}
-  }
+if (keyBuffer.endsWith("sudo quit") || keyBuffer.endsWith(":q")) {
+  document.body.innerHTML = "<h1 style='color: white; text-align: center; margin-top: 20vh;'>[Process Completed]</h1>";
+  document.body.style.backgroundColor = "black";
+  document.head.innerHTML = "<title>Closed</title>"; // Sekme ismini de değiştir
+}
 });
 
 // --- YENİ: Daraltılmış Kaçış Alanı Algoritması ---
