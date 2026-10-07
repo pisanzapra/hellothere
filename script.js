@@ -1,4 +1,3 @@
-// ---- Tema (arkaplan rengi + müzik) haritası ----
 const themeMap = {
   main:         { color: '#1a0508', track: 'songs/aria.mp3', song: 'Aria of The Soul', artist: 'Shoji Meguro' },
   stats:        { color: '#2a0a0d', track: 'songs/specialist.mp3', song: 'specialist', artist: 'ATLUS Sound Team' },
@@ -72,7 +71,7 @@ function toggleAudio() {
   }
 }
 
-// --- IGOR İNTERAKTİF SOHBET SİSTEMİ (görsel tabanlı) ---
+// IGOR İNTERAKTİF SOHBET SİSTEMİ (görsel tabanlı)
 let hasLeftMainScreen = false; 
 
 function showChoices() {
@@ -113,7 +112,7 @@ function resetDialogue() {
   if (choicesContainer) choicesContainer.style.display = 'none';
 }
 
-// --- ÖMER'İN SUBSCRIPTION DİYALOĞU ---
+// ÖMER'İN SUBSCRIPTION DİYALOĞU
 let omerDialogueStep = 0;
 
 function advanceOmerDialogue() {
@@ -132,7 +131,7 @@ function resetOmerDialogue() {
   if (actions) actions.classList.remove('visible');
 }
 
-// --- EKRAN GEÇİŞLERİ ---
+// ekran geçişleri
 function showScreen(screenId) {
   playSelectSound();
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -235,7 +234,7 @@ document.querySelectorAll('.menu-item, .p5-choice-btn').forEach(item => {
   item.addEventListener('mouseenter', playHoverSound);
 });
 
-// --- "theworld" ZA WARUDO efekti ---
+// ZA WARUDO efekti
 function playTimeStopSound() {
   try {
     const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -336,7 +335,7 @@ function triggerTimeStopEffect() {
   }, 1000);
 }
 
-// --- "sudo", "sudo quit" ve ":q" ---
+// "sudo quit" ve ":q"
 let keyBuffer = "";
 let sudoMode = false;
 
@@ -353,11 +352,11 @@ document.addEventListener('keydown', (e) => {
 if (keyBuffer.endsWith("sudo quit") || keyBuffer.endsWith(":q")) {
   document.body.innerHTML = "<h1 style='color: white; text-align: center; margin-top: 20vh;'>[Process Completed]</h1>";
   document.body.style.backgroundColor = "black";
-  document.head.innerHTML = "<title>Closed</title>"; // Sekme ismini de değiştir
+  document.head.innerHTML = "<title>Closed</title>"; 
 }
 });
 
-// --- YENİ: Daraltılmış Kaçış Alanı Algoritması ---
+// Daraltılmış Kaçış Alanı 
 let trollBtnX = 0;
 let trollBtnY = 0;
 let dodgeCount = 0;
